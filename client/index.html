@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%236366f1'><path d='M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm0 2.18l7 3.12v4.7c0 4.54-3.14 8.79-7 9.9-3.86-1.11-7-5.36-7-9.9V6.3l7-3.12z'/></svg>" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>IoT/IIoT Intrusion Detection System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+      // Global error trapper to ensure errors are visible on screen
+      window.addEventListener('error', function(e) {
+        var box = document.getElementById('debug-error-box');
+        if (!box) {
+          box = document.createElement('div');
+          box.id = 'debug-error-box';
+          box.style.cssText = 'position:fixed;top:16px;left:16px;right:16px;z-index:999999;background:rgba(239,68,68,0.95);color:white;padding:20px;border-radius:12px;font-family:monospace;font-size:13px;white-space:pre-wrap;box-shadow:0 10px 30px rgba(0,0,0,0.5);';
+          document.body.appendChild(box);
+        }
+        box.textContent = 'Script Error: ' + (e.message || e.error) + '\nLocation: ' + (e.filename || '') + ':' + (e.lineno || '') + ':' + (e.colno || '') + '\n\n' + (e.error && e.error.stack ? e.error.stack : '');
+      });
+      window.addEventListener('unhandledrejection', function(e) {
+        var box = document.getElementById('debug-error-box');
+        if (!box) {
+          box = document.createElement('div');
+          box.id = 'debug-error-box';
+          box.style.cssText = 'position:fixed;top:16px;left:16px;right:16px;z-index:999999;background:rgba(239,68,68,0.95);color:white;padding:20px;border-radius:12px;font-family:monospace;font-size:13px;white-space:pre-wrap;box-shadow:0 10px 30px rgba(0,0,0,0.5);';
+          document.body.appendChild(box);
+        }
+        box.textContent = 'Unhandled Promise Rejection: ' + (e.reason && e.reason.stack ? e.reason.stack : String(e.reason));
+      });
+    </script>
+  </head>
+  <body style="background-color: #060b18; color: #f1f5f9; margin: 0; min-height: 100vh;">
+    <div id="root">
+      <div style="display:flex;align-items:center;justify-content:center;height:100vh;font-family:'Inter',sans-serif;color:#94a3b8;flex-direction:column;gap:16px;">
+        <div style="width:40px;height:40px;border:3px solid rgba(99,102,241,0.2);border-top-color:#6366f1;border-radius:50%;animation:spin 1s linear infinite;"></div>
+        <div style="font-size:15px;letter-spacing:0.02em;">Initializing IoT Intrusion Detection Dashboard...</div>
+        <style>@keyframes spin { to { transform: rotate(360deg); } }</style>
+      </div>
+    </div>
+    <script type="module" src="/src/main.jsx"></script>
+  </body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "name": "socket.io-client",
+  "version": "4.8.3",
+  "type": "module",
+  "main": "index.js",
+  "module": "index.js",
+  "exports": {
+    ".": "./index.js"
+  }
+}
