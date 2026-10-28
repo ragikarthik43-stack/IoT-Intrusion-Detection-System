@@ -4,6 +4,38 @@ import joblib, numpy as np, pandas as pd, plotly.express as px, shap, streamlit 
 from sklearn.metrics import accuracy_score, precision_score, recall_score, f1_score
 
 st.set_page_config(page_title="IoT Intrusion Detection System", page_icon="🛡️", layout="wide")
+
+# ---------- login gate ----------
+import hmac
+DASH_USER = os.environ.get("DASH_USER", "admin")
+DASH_PASS = os.environ.get("DASH_PASS", "admin123")
+
+if "authed" not in st.session_state:
+    st.session_state["authed"] = False
+
+if not st.session_state["authed"]:
+    _, mid, _ = st.columns([1, 1.2, 1])
+    with mid:
+        st.markdown("## 🛡️ IoT Intrusion Detection System")
+        st.caption("Sign in to open the live security dashboard")
+        with st.form("login_form"):
+            u = st.text_input("Username")
+            p = st.text_input("Password", type="password")
+            go = st.form_submit_button("Sign in", use_container_width=True)
+        if go:
+            ok_u = hmac.compare_digest(u.encode(), DASH_USER.encode())
+            ok_p = hmac.compare_digest(p.encode(), DASH_PASS.encode())
+            if ok_u and ok_p:
+                st.session_state["authed"] = True
+                st.rerun()
+            else:
+                st.error("Invalid username or password")
+    st.stop()
+
+with st.sidebar:
+    if st.button("🚪 Log out", use_container_width=True):
+        st.session_state["authed"] = False
+        st.rerun()
 HERE = Path(__file__).parent
 DROP = ['ts', 'src_ip', 'dst_ip', 'src_port', 'dst_port', 'label', 'type']
 
